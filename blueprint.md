@@ -1,6 +1,5 @@
 # Classes
 * Board
-* Squares
 * Pieces
   * Empty
   * Pawn
@@ -12,12 +11,10 @@
 
 
 ## Board
-Will contain a 2d grid of coordinates using an array of 8 arrays, each containing 8 Square elements
+Will contain a 2d grid of coordinates using an array of 8 arrays, each containing 8 Piece elements
 
-## Squares
-* Attributes
-  1. Piece Object (white, black, empty)
-
+## Pieces
+ 
 
 
 # Movement

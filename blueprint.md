@@ -1,7 +1,6 @@
 # Classes
 * Board
-* Pieces
-  * Empty
+* Pieces 
   * Pawn
   * Rook
   * Knight
@@ -27,7 +26,7 @@
 * Attributes
   * Black, White, or Empty
   * List of locations the piece can move to
-
+  
 
 
 

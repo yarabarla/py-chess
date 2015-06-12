@@ -29,8 +29,13 @@
   * List of locations the piece can move to
 
 
+
+
 # Movement
 137 is the maximum number of moves possible per turn per team
 
-
-
+* Will store end coordinates of possible movements rather than all possible coordinates to save space. 
+* Whenever a move is made, the set of possible moves for all pieces are updated-- is very inefficient but it will suffice for now
+* Will need a flipped algorithm to calculate forward and backward vectors for black since + movement for white would be - movement relative to how black moves.
+* Need to figure out en passante rules
+* Need to figure out castling rules

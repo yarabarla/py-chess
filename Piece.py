@@ -6,7 +6,12 @@ class Piece(object):
 
 class Pawn(Piece):
     """Contains attributes of a pawn"""
-    pass
+    def __repr__(self):
+        if self.color == "White":
+            return u"\u265f"
+
+        else:
+            return u"\u2659"
 
 class Rook(Piece):
     """Contains attributes of a rook"""

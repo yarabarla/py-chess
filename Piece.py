@@ -5,7 +5,7 @@ class Piece(object):
         self.color = color
 
 class Pawn(Piece):
-    """Contains attributes of a pawn"""
+    """Contains attributes of a pawn. Unicode for black and white pieces switched around since they are going to be displayed on a black background"""
     def __repr__(self):
         if self.color == "White":
             return u"\u265f"

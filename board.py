@@ -9,16 +9,18 @@ class Board(object):
 
     def __repr__(self):
         """Formats how the board will be displayed. Displays rank and file letters/numbers and pieces"""
-        disp = "  1 2 3 4 5 6 7 8\n" # Displays 
+        disp = u"  1 2 3 4 5 6 7 8\n"
         for row in xrange(8):
             disp += chr(ord('A') + row) + ' '
             for col in xrange(8):
-                disp += str(self.main_board[row][col])
+                disp += unicode(self.main_board[row][col]) + ' '
 
             disp += '\n'
 
-        return disp
+        return disp.encode('utf8')
 
 def test():
     new = Board()
     print new
+
+test()

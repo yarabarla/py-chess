@@ -16,8 +16,9 @@ class Board(object):
                 disp += str(self.main_board[row][col])
 
             disp += '\n'
-            
+
         return disp
 
-new = Board()
-print new
+def test():
+    new = Board()
+    print new

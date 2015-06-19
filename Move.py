@@ -53,7 +53,14 @@ def set_new_game(board):
 
 
 def get_move():
-    """Prompts user for desired move. Only using numerical coordinates for now"""
-    piece_from = tuple(i for i in raw_input("From?"))
-    piece_to = tuple(i for i in raw_input("To?"))
+    """
+    Prompts user for desired move. Only using numerical coordinates for now.
+    Stores from and to coordinates in tuples. Returns a tuple of these tuples.
+    """
+    piece_from = tuple(int(i) for i in raw_input("From?"))
+    piece_to = tuple(int(i) for i in raw_input("To?"))
+
+    print "Moving from {0} to {1}".format(piece_from, piece_to)
+    return (piece_from, piece_to)
+
 

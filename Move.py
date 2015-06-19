@@ -1,4 +1,4 @@
-import Piece
+from Piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 
 def set_new_game(board):
     """
@@ -50,4 +50,10 @@ def set_new_game(board):
 
                 else:
                     board[row][col] = Piece.King(False, 'Black')
+
+
+def get_move():
+    """Prompts user for desired move. Only using numerical coordinates for now"""
+    piece_from = tuple(i for i in raw_input("From?"))
+    piece_to = tuple(i for i in raw_input("To?"))
 

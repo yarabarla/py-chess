@@ -1,12 +1,15 @@
 import Piece
 
 def set_new_game(board):
-    """Initializes pieces for a new chess game"""
+    """
+    Initializes pieces for a new chess game.
+    Uses two for loops and if/else statements to set the pieces.
+    """
     A, B, C, D, E, F, G, H = range(8), range(8), range(8), range(8), range(8), range(8), range(8), range(8) # Feels unpythonic but can't do A = B = C = ... = range(8) since lists are mutable
     board.extend([A, B, C, D, E, F, G, H])
 
     for row in xrange(8):
-        for col in xrange(8):  # Columns 1 - 6 are all pawns and empty so this loop is to place them
+        for col in xrange(8):
             if col == 1:
                 board[row][col] = Piece.Pawn(False, 'White')
 

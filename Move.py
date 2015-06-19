@@ -11,45 +11,45 @@ def set_new_game(board):
     for row in xrange(8):
         for col in xrange(8):
             if col == 1:
-                board[row][col] = Piece.Pawn(False, 'White')
+                board[row][col] = Pawn(False, 'White')
 
             elif col == 6:
-                board[row][col] = Piece.Pawn(False, 'Black')
+                board[row][col] = Pawn(False, 'Black')
 
             elif col in range(2,7):
-                board[row][col] = Piece.Piece(True, 'N/A')
+                board[row][col] = Piece(True, 'N/A')
 
             elif col == 0:
                 if row == 0 or row == 7:
-                    board[row][col] = Piece.Rook(False, 'White')
+                    board[row][col] = Rook(False, 'White')
 
                 elif row == 1 or row == 6:
-                    board[row][col] = Piece.Knight(False, 'White')
+                    board[row][col] = Knight(False, 'White')
 
                 elif row == 2 or row == 5:
-                    board[row][col] = Piece.Bishop(False, 'White')
+                    board[row][col] = Bishop(False, 'White')
 
                 elif row == 3:
-                    board[row][col] = Piece.Queen(False, 'White')
+                    board[row][col] = Queen(False, 'White')
 
                 else:
-                    board[row][col] = Piece.King(False, 'White')
+                    board[row][col] = King(False, 'White')
 
             else:
                 if row == 0 or row == 7:
-                    board[row][col] = Piece.Rook(False, 'Black')
+                    board[row][col] = Rook(False, 'Black')
 
                 elif row == 1 or row == 6:
-                    board[row][col] = Piece.Knight(False, 'Black')
+                    board[row][col] = Knight(False, 'Black')
 
                 elif row == 2 or row == 5:
-                    board[row][col] = Piece.Bishop(False, 'Black')
+                    board[row][col] = Bishop(False, 'Black')
 
                 elif row == 3:
-                    board[row][col] = Piece.Queen(False, 'Black')
+                    board[row][col] = Queen(False, 'Black')
 
                 else:
-                    board[row][col] = Piece.King(False, 'Black')
+                    board[row][col] = King(False, 'Black')
 
 
 def get_move():

@@ -19,8 +19,4 @@ class Board(object):
 
         return disp.encode('utf8')
 
-def test():
-    new = Board()
-    print new
-
 

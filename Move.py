@@ -2,11 +2,15 @@ from Piece import Piece, Pawn, Rook, Knight, Bishop, Queen, King
 
 class Move(object):
     """Contains all the move methods"""
-    def set_new_game(board):
+    def __init__(self):
+        pass
+
+    def set_new_game(self):
         """
         Initializes pieces for a new chess game.
         Uses two for loops and if/else statements to set the pieces.
         """
+        board = []
         A, B, C, D, E, F, G, H = range(8), range(8), range(8), range(8), range(8), range(8), range(8), range(8) # Feels unpythonic but can't do A = B = C = ... = range(8) since lists are mutable
         board.extend([A, B, C, D, E, F, G, H])
 
@@ -53,8 +57,9 @@ class Move(object):
                     else:
                         board[row][col] = King(False, 'Black')
 
+        return board
 
-    def get_move():
+    def get_move(self):
         """
         Prompts user for desired move. Only using numerical coordinates for now.
         Stores from and to coordinates in tuples. Returns a tuple of these tuples.

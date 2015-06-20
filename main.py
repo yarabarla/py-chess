@@ -1,4 +1,5 @@
-import Board, Move
+from Board import Board
+import Move
 
 game = Board()
-print game
+Move.get_move()

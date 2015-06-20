@@ -23,4 +23,4 @@ def test():
     new = Board()
     print new
 
-test()
+

@@ -1,11 +1,10 @@
-import Piece, Move
+from Move import Move
 
-class Board(object):
+class Board(Move):
     """Manipulates the chess board"""
     def __init__(self):
         """Calls create_board method to make the initialize the board when Board is instantiated"""
-        self.main_board = []
-        Move.set_new_game(self.main_board)
+        self.main_board = self.set_new_game()
 
     def __repr__(self):
         """Formats how the board will be displayed. Displays rank and file letters/numbers and pieces"""

@@ -71,6 +71,9 @@ class Move(object):
         print "Moving from {0} to {1}".format(piece_from, piece_to)
         return (piece_from, piece_to)
 
-    #def move(piece_from, piece_to):
-    #    """Rudimentary move function for now"""
+    def move(self, piece_from, piece_to):
+        """Rudimentary move function for now"""
+        temp = self.main_board[0][0] 
+        self.main_board[0][0] = self.main_board[0][1]
+        self.main_board[0][1] = temp
 

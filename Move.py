@@ -62,7 +62,8 @@ class Move(object):
     def get_move(self):
         """
         Prompts user for desired move. Only using numerical coordinates for now.
-        Stores from and to coordinates in tuples. Returns a tuple of these tuples.
+        Stores from and to coordinates in tuples. Returns a tuple of these tuples."
+        Input is basic now, eg. 12 is parsed as (1, 2)
         """
         piece_from = tuple(int(i) for i in raw_input("From?"))
         piece_to = tuple(int(i) for i in raw_input("To?"))

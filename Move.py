@@ -65,8 +65,8 @@ class Move(object):
         Stores from and to coordinates in tuples. Returns a tuple of these tuples."
         Input is basic now, eg. 12 is parsed as (1, 2)
         """
-        piece_from = tuple(int(i) for i in raw_input("From?"))
-        piece_to = tuple(int(i) for i in raw_input("To?"))
+        piece_from = tuple(i for i in raw_input("From?"))
+        piece_to = tuple(i for i in raw_input("To?"))
 
         print "Moving from {0} to {1}".format(piece_from, piece_to)
         return (piece_from, piece_to)
@@ -76,3 +76,9 @@ class Move(object):
         self.main_board[piece_to[0]][piece_to[1]] = self.main_board[piece_from[0]][piece_from[1]]  # Moves piece
         self.main_board[piece_from[0]][piece_from[1]] = Piece(True, 'NA')  # Makes old location empty
 
+    def alphanum_to_cartesian(self, piece_from, piece_to):
+        """
+        Converts board coordinate input--eg. 'A5' to cartesian coordinates.
+        Takes the two movement tuples, converts, then returns a single tuple
+        """
+        pass

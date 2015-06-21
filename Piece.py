@@ -18,6 +18,10 @@ class Pawn(Piece):
     Contains attributes of a pawn. Unicode for all black and white pieces switched around since they
     are going to be displayed on a black background
     """
+    def __init__(self):
+        self.moved = False  # To determine whether the pawn can move two spaces forward
+        self.double_step = False  # Used for en passant
+    
     def __repr__(self):
         if self.color == "White":
             return u"\u265f"

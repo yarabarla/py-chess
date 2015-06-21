@@ -69,7 +69,9 @@ class Move(object):
         piece_to = tuple(i for i in raw_input("To?"))
 
         print "Moving from {0} to {1}".format(piece_from, piece_to)
-        return (piece_from, piece_to)
+        coordinates = self.alphanum_to_cartesian(piece_from, piece_to)
+
+        return coordinates
 
     def move(self, piece_from, piece_to):
         """Rudimentary move function for now"""
@@ -82,13 +84,13 @@ class Move(object):
         Takes the two movement tuples, converts, then returns a single tuple
         """
         atoi = {
-            'A' : 0
-            'B' : 1
-            'C' : 2
-            'D' : 3
-            'E' : 4
-            'F' : 5
-            'G' : 6
+            'A' : 0,
+            'B' : 1,
+            'C' : 2,
+            'D' : 3,
+            'E' : 4,
+            'F' : 5,
+            'G' : 6,
             'H' : 7
         }
 

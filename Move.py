@@ -81,4 +81,18 @@ class Move(object):
         Converts board coordinate input--eg. 'A5' to cartesian coordinates.
         Takes the two movement tuples, converts, then returns a single tuple
         """
-        pass
+        atoi = {
+            'A' : 0
+            'B' : 1
+            'C' : 2
+            'D' : 3
+            'E' : 4
+            'F' : 5
+            'G' : 6
+            'H' : 7
+        }
+
+        piece_from = (atoi[piece_from[0]], int(piece_from[1]) - 1)  # -1 since counting starts from 0 not 1
+        piece_to = (atoi[piece_to[0]], int(piece_to[1]) - 1)
+
+        return (piece_from, piece_to)

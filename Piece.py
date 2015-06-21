@@ -23,6 +23,8 @@ class Pawn(Piece):
         else:
             return u"\u2659"
 
+    def move_set(self, piece_from, board):
+
 class Rook(Piece):
     """Contains attributes of a rook"""
     def __repr__(self):

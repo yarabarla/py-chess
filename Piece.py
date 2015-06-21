@@ -10,6 +10,8 @@ class Piece(object):
     def __repr__(self):
         if self.empty:
             return u"\u25A1"
+    def move_set(self, piece_from, board):
+        print "Error: This is an empty space"
 
 class Pawn(Piece):
     """
@@ -24,6 +26,7 @@ class Pawn(Piece):
             return u"\u2659"
 
     def move_set(self, piece_from, board):
+        pass
 
 class Rook(Piece):
     """Contains attributes of a rook"""

@@ -39,5 +39,5 @@
 * Need to figure out castling rules
 
 # Goals for Tomorrow
-* Change get move so user can actually input board coordinates instead of array coordinates --eg. A2 to A4 rather than (0,1) to (0, 3)
+* Done-- Change get move so user can actually input board coordinates instead of array coordinates --eg. A2 to A4 rather than (0,1) to (0, 3)
 * Implement the legal_move() method. 

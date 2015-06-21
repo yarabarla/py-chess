@@ -23,7 +23,7 @@ class Move(object):
                     board[row][col] = Pawn(False, 'Black')
 
                 elif col in range(2,7):
-                    board[row][col] = Piece(True, 'N/A')
+                    board[row][col] = Piece(True, 'NA')
 
                 elif col == 0:
                     if row == 0 or row == 7:
@@ -73,7 +73,6 @@ class Move(object):
 
     def move(self, piece_from, piece_to):
         """Rudimentary move function for now"""
-        temp = self.main_board[0][0] 
-        self.main_board[0][0] = self.main_board[0][1]
-        self.main_board[0][1] = temp
+        self.main_board[piece_to[0]][piece_to[1]] = self.main_board[piece_from[0]][piece_from[1]]  # Moves piece
+        self.main_board[piece_from[0]][piece_from[1]] = Piece(True, 'NA')  # Makes old location empty
 

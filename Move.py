@@ -69,9 +69,9 @@ class Move(object):
         piece_to = tuple(i for i in raw_input("To?"))
 
         print "Moving from {0} to {1}".format(piece_from, piece_to)
-        piece_from, piece_to = self.alphanum_to_cartesian(piece_from, piece_to)
+        piece_from, piece_to = self.anum_to_cart(piece_from, piece_to)
 
-        legal = self.main_board[piece_from[0]][piece_from[1]].generate_moves(piece_from,self.main_board)
+        legal = self.main_board[piece_from[0]][piece_from[1]].move_set(piece_from,self.main_board)
         print legal
 
         return (piece_from, piece_to)
@@ -79,9 +79,9 @@ class Move(object):
     def move(self, piece_from, piece_to):
         """Rudimentary move function for now"""
         self.main_board[piece_to[0]][piece_to[1]] = self.main_board[piece_from[0]][piece_from[1]]  # Moves piece
-        self.main_board[piece_from[0]][piece_from[1]] = Piece(True, 'NA')  # Makes old location empty
+        self.main_board[piece_from[0]][piece_from[1]] = Piece()  # Makes old location empty
 
-    def alphanum_to_cartesian(self, piece_from, piece_to):
+    def anum_to_cart(self, piece_from, piece_to):
         """
         Converts board coordinate input--eg. 'A5' to cartesian coordinates.
         Takes the two movement tuples, converts, then returns a single tuple
@@ -101,3 +101,9 @@ class Move(object):
         piece_to = (atoi[piece_to[0]], int(piece_to[1]) - 1)
 
         return (piece_from, piece_to)
+
+    def cart_to_anum(self, piece):
+        """Converts from array coordinates to board coordinates for testing purposes"""
+        itoa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+        piece = (itoa[piece[0]], piece[1] + 1)
+        return piece

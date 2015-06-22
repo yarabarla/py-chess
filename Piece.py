@@ -70,6 +70,10 @@ class Pawn(Piece):
         return self.cset
 class Rook(Piece):
     """Contains attributes of a rook"""
+    def __init__(self, empty, color):
+        self.empty = empty
+        self.color = color
+
     def __repr__(self):
         if self.color == "White":
             return u"\u265C"
@@ -79,6 +83,10 @@ class Rook(Piece):
 
 class Knight(Piece):
     """Contains attributes of a knight"""
+    def __init__(self, empty, color):
+        self.empty = empty
+        self.color = color
+
     def __repr__(self):
         if self.color == "White":
             return u"\u265E"
@@ -88,6 +96,10 @@ class Knight(Piece):
 
 class Bishop(Piece):
     """Contains attributes of a bishop"""
+    def __init__(self, empty, color):
+        self.empty = empty
+        self.color = color
+
     def __repr__(self):
         if self.color == "White":
             return u"\u265D"
@@ -97,6 +109,10 @@ class Bishop(Piece):
 
 class Queen(Piece):
     """Contains attributes of a queen"""
+    def __init__(self, empty, color):
+        self.empty = empty
+        self.color = color
+
     def __repr__(self):
         if self.color == "White":
             return u"\u265B"
@@ -106,6 +122,10 @@ class Queen(Piece):
 
 class King(Piece):
     """Contains attributes of a king"""
+    def __init__(self, empty, color):
+        self.empty = empty
+        self.color = color
+
     def __repr__(self):
         if self.color == "White":
             return u"\u265A"

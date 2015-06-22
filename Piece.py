@@ -6,6 +6,7 @@ class Piece(object):
     def __init__(self):
         self.empty = True
         self.color = "NA"
+        self.double_step = False
 
     def __repr__(self):
         if self.empty:
@@ -13,13 +14,16 @@ class Piece(object):
     def move_set(self, piece, board):
         print "Error: This is an empty space"
 
-    def piece_at(self, at, color = None):
+    def piece_at(self, at, color = None, en_passant = None):
         """
         If only at argument is filled, the function checks to see if there is a chess piece at the given
         coordinate.
 
-        If the color argument is given as well, the function checks to see if the given coordinate's piece
-        matches the queried color.
+        If the color argument is given as well, the function checks to see if the given piece matches
+        the queried color.
+
+        If the en passant argument is filled with the piece rank, the function checks if the target piece
+        moved two forward initially and whether the attacking piece is on the right rank.
         """
         if color == None:
             if not at.empty:
@@ -27,9 +31,20 @@ class Piece(object):
             else:
                 return False
 
-        else:
+        elif en_passant == None:   # If color is given but en passant is not
             if at.color == color:
                 return True
+            else:
+                return False
+
+        else:  # En passant
+            if at.double_step and at.color == color:
+                if at.color == "White" and en_passante == 4:
+                    return True
+                elif at.color == "Black" and en_passante == 3:
+                    return True
+                else:
+                    return False
             else:
                 return False
 
@@ -52,10 +67,14 @@ class Pawn(Piece):
             return u"\u2659"
 
     def move_set(self, piece, board):
-        """Consolidates all the movement set information and returns final list"""
+        """
+        Consolidates all the movement set information and returns final list of valid moves
+        !!!Does NOT include en passant yet!!!
+
+        """
         pass
 
-    def generate_moves(self, piece, board):
+    def standard_moves(self, piece, board):
         """Takes piece and calculates all the spaces the piece can move to"""
         self.total = []
         if self.color == "White":
@@ -74,20 +93,30 @@ class Pawn(Piece):
 
         return self.total
 
-    def capture_set(self, piece, board):
+    def capture_moves(self, piece, board):
         """Creates a list of moves where a piece can be captured by the pawn"""
         self.cset = []
         if self.color == "White":
-            if self.piece_at(board[piece[0] - 1][piece[1] + 1], "Black"):
+            if self.piece_at(board[piece[0] - 1][piece[1] + 1], "Black"):  # Regular capture
                 self.cset.append((piece[0] - 1 , piece[1] + 1))
             if self.piece_at(board[piece[0] + 1][piece[1] + 1], "Black"):
                 self.cset.append((piece[0] + 1 , piece[1] + 1))
 
+            if self.piece_at(board[piece[0] - 1][piece[1]], "Black", piece[1])  # En passant
+                self.cset.append((piece[0] - 1, piece[1]))
+            if self.piece_at(board[piece[0] + 1][piece[1]], "Black", piece[1])
+                self.cset.append((piece[0] + 1, piece[1]))
+
         else:
-            if self.piece_at(board[piece[0] - 1][piece[1] - 1], "White"):
+            if self.piece_at(board[piece[0] - 1][piece[1] - 1], "White"):  # Regular capture
                 self.cset.append((piece[0] - 1 , piece[1] - 1))
             if self.piece_at(board[piece[0] + 1][piece[1] - 1], "White"):
                 self.cset.append((piece[0] + 1 , piece[1] - 1))
+
+            if self.piece_at(board[piece[0] - 1][piece[1]], "White", piece[1])  # En passant
+                self.cset.append((piece[0] - 1, piece[1]))
+            if self.piece_at(board[piece[0] + 1][piece[1]], "White", piece[1])
+                self.cset.append((piece[0] + 1, piece[1]))
 
         return self.cset
 

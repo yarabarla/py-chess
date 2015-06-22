@@ -72,11 +72,12 @@ class Move(object):
         piece_from, piece_to = self.anum_to_cart(piece_from, piece_to)
 
         legal = self.main_board[piece_from[0]][piece_from[1]].move_set(piece_from,self.main_board)
-        print legal
+        for i in legal:   # List of legal moves for testing
+            print self.cart_to_anum(i)
 
         return (piece_from, piece_to)
 
-    def move(self, piece_from, piece_to):
+    def apply_move(self, piece_from, piece_to):
         """Rudimentary move function for now"""
         self.main_board[piece_to[0]][piece_to[1]] = self.main_board[piece_from[0]][piece_from[1]]  # Moves piece
         self.main_board[piece_from[0]][piece_from[1]] = Piece()  # Makes old location empty

@@ -23,7 +23,7 @@ class Move(object):
                     board[row][col] = Pawn(False, 'Black')
 
                 elif col in range(2,7):
-                    board[row][col] = Piece(True, 'NA')
+                    board[row][col] = Piece()
 
                 elif col == 0:
                     if row == 0 or row == 7:

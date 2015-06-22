@@ -21,7 +21,7 @@ class Pawn(Piece):
     def __init__(self):
         self.moved = False  # To determine whether the pawn can move two spaces forward
         self.double_step = False  # Used for en passant
-    
+
     def __repr__(self):
         if self.color == "White":
             return u"\u265f"
@@ -30,7 +30,19 @@ class Pawn(Piece):
             return u"\u2659"
 
     def move_set(self, piece_from, board):
-        pass
+        """Takes piece_from and calculates all the space the piece can move to"""
+        self.legal = []
+        if self.color == "White":
+            self.legal.append((piece_from[0], piece_from[1] + 1))  # One square forward
+
+            if not self.moved:
+                self.legal.append((piece_from[0], piece_from[1] + 2))  # Two squares forward
+
+        else:   # If piece is black, the math is backwards
+            self.legal.append((piece_from[0], piece_from[1] - 1))
+
+            if not self.moved:
+                self.legal.append((piece_from[0], piece_from[1] - 2))
 
 class Rook(Piece):
     """Contains attributes of a rook"""

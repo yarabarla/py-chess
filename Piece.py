@@ -3,9 +3,9 @@ class Piece(object):
     Generalized piece class that contains attributes about whether it is an empty piece or if it is black or white.
     All pieces except empty have their own subclass. Contains a list of locations the piece can move to
     """
-    def __init__(self, empty, color):
+    def __init__(self, empty):
         self.empty = empty
-        self.color = color
+        self.color = "NA" 
 
     def __repr__(self):
         if self.empty:
@@ -18,7 +18,9 @@ class Pawn(Piece):
     Contains attributes of a pawn. Unicode for all black and white pieces switched around since they
     are going to be displayed on a black background
     """
-    def __init__(self):
+    def __init__(self, empty, color):
+        self.empty = empty
+        self.color = color
         self.moved = False  # To determine whether the pawn can move two spaces forward
         self.double_step = False  # Used for en passant
 
@@ -53,7 +55,7 @@ class Pawn(Piece):
     def capture_set(self, piece_from, board):
         """Creates a list of capturable moves"""
         self.max_possible = []
-        if self.color == "White"
+        if self.color == "White":
             self.max_possible.append((piece_from[0] - 1 , piece_from[1] + 1))
             self.max_possible.append((piece_from[0] + 1 , piece_from[1] + 1))
 

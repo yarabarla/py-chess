@@ -13,6 +13,19 @@ class Piece(object):
     def move_set(self, piece_from, board):
         print "Error: This is an empty space"
 
+    def piece_at(at, color = None):
+        if color == None:
+            if not at.empty:
+                return True
+            else:
+                return False
+
+        else:
+            if at.color == color:
+                return True
+            else:
+                return False
+
 class Pawn(Piece):
     """
     Contains attributes of a pawn. Unicode for all black and white pieces switched around since they
@@ -70,18 +83,7 @@ class Pawn(Piece):
         return self.cset
 
 
-    def piece_at(at, color = None):
-        if color == None:
-            if not at.empty:
-                return True
-            else:
-                return False
-
-        else:
-            if at.color == color:
-                return True
-            else:
-                return False
+    
 class Rook(Piece):
     """Contains attributes of a rook"""
     def __init__(self, empty, color):

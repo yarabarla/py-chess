@@ -68,6 +68,20 @@ class Pawn(Piece):
                 self.cset.append((piece_from[0] + 1 , piece_from[1] - 1))
 
         return self.cset
+
+
+    def piece_at(at, color = None):
+        if color == None:
+            if not at.empty:
+                return True
+            else:
+                return False
+
+        else:
+            if at.color == color:
+                return True
+            else:
+                return False
 class Rook(Piece):
     """Contains attributes of a rook"""
     def __init__(self, empty, color):

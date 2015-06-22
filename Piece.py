@@ -30,6 +30,10 @@ class Pawn(Piece):
             return u"\u2659"
 
     def move_set(self, piece_from, board):
+        """Consolidates all the movement set information and returns final list"""
+        pass
+
+    def generate_moves(self, piece_from, board):
         """Takes piece_from and calculates all the space the piece can move to"""
         self.legal = []
         if self.color == "White":
@@ -43,6 +47,15 @@ class Pawn(Piece):
 
             if not self.moved:
                 self.legal.append((piece_from[0], piece_from[1] - 2))
+
+        return self.legal
+
+    def capture_set(self, piece_from, board):
+        """Creates a list of capturable moves"""
+        self.max_possible = []
+        if self.color == "White"
+            self.max_possible.append((piece_from[0] - 1 , piece_from[1] + 1))
+            self.max_possible.append((piece_from[0] + 1 , piece_from[1] + 1))
 
 class Rook(Piece):
     """Contains attributes of a rook"""

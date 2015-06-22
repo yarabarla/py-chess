@@ -39,9 +39,9 @@ class Piece(object):
 
         else:  # En passant
             if at.double_step and at.color == color:
-                if at.color == "White" and en_passante == 4:
+                if at.color == "White" and en_passant == 3:
                     return True
-                elif at.color == "Black" and en_passante == 3:
+                elif at.color == "Black" and en_passant == 4:
                     return True
                 else:
                     return False
@@ -102,9 +102,9 @@ class Pawn(Piece):
             if self.piece_at(board[piece[0] + 1][piece[1] + 1], "Black"):
                 self.cset.append((piece[0] + 1 , piece[1] + 1))
 
-            if self.piece_at(board[piece[0] - 1][piece[1]], "Black", piece[1])  # En passant
+            if self.piece_at(board[piece[0] - 1][piece[1]], "Black", piece[1]):  # En passant
                 self.cset.append((piece[0] - 1, piece[1]))
-            if self.piece_at(board[piece[0] + 1][piece[1]], "Black", piece[1])
+            if self.piece_at(board[piece[0] + 1][piece[1]], "Black", piece[1]):
                 self.cset.append((piece[0] + 1, piece[1]))
 
         else:
@@ -113,9 +113,9 @@ class Pawn(Piece):
             if self.piece_at(board[piece[0] + 1][piece[1] - 1], "White"):
                 self.cset.append((piece[0] + 1 , piece[1] - 1))
 
-            if self.piece_at(board[piece[0] - 1][piece[1]], "White", piece[1])  # En passant
+            if self.piece_at(board[piece[0] - 1][piece[1]], "White", piece[1]):  # En passant
                 self.cset.append((piece[0] - 1, piece[1]))
-            if self.piece_at(board[piece[0] + 1][piece[1]], "White", piece[1])
+            if self.piece_at(board[piece[0] + 1][piece[1]], "White", piece[1]):
                 self.cset.append((piece[0] + 1, piece[1]))
 
         return self.cset

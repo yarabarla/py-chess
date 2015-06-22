@@ -10,10 +10,17 @@ class Piece(object):
     def __repr__(self):
         if self.empty:
             return u"\u25A1"
-    def move_set(self, piece_from, board):
+    def move_set(self, piece, board):
         print "Error: This is an empty space"
 
-    def piece_at(at, color = None):
+    def piece_at(self, at, color = None):
+        """
+        If only at argument is filled, the function checks to see if there is a chess piece at the given
+        coordinate.
+
+        If the color argument is given as well, the function checks to see if the given coordinate's piece
+        matches the queried color.
+        """
         if color == None:
             if not at.empty:
                 return True
@@ -44,46 +51,46 @@ class Pawn(Piece):
         else:
             return u"\u2659"
 
-    def move_set(self, piece_from, board):
+    def move_set(self, piece, board):
         """Consolidates all the movement set information and returns final list"""
         pass
 
-    def generate_moves(self, piece_from, board):
-        """Takes piece_from and calculates all the spaces the piece can move to"""
+    def generate_moves(self, piece, board):
+        """Takes piece and calculates all the spaces the piece can move to"""
         self.total = []
         if self.color == "White":
-            self.total.append((piece_from[0], piece_from[1] + 1))  # One square forward
+            if not self.piece_at(board[piece[0]][piece[1] + 1]):  # If there is not a piece there
+                self.total.append((piece[0], piece[1] + 1))  # One square forward
 
-            if not self.moved:
-                self.total.append((piece_from[0], piece_from[1] + 2))  # Two squares forward
+            if not self.moved and not self.piece_at(board[piece[0]][piece[1] + 2]):
+                self.total.append((piece[0], piece[1] + 2))  # Two squares forward
 
         else:   # If piece is black, the math is backwards
-            self.total.append((piece_from[0], piece_from[1] - 1))
+            if not self.piece_at(board[piece[0]][piece[1] - 1]):
+                self.total.append((piece[0], piece[1] - 1))
 
-            if not self.moved:
-                self.total.append((piece_from[0], piece_from[1] - 2))
+            if not self.moved and not self.piece_at(board[piece[0]][piece[1] - 2]):
+                self.total.append((piece[0], piece[1] - 2))
 
         return self.total
 
-    def capture_set(self, piece_from, board):
+    def capture_set(self, piece, board):
         """Creates a list of moves where a piece can be captured by the pawn"""
         self.cset = []
         if self.color == "White":
-            if board[piece_from[0] - 1][piece_from[1] + 1].color == "Black":
-                self.cset.append((piece_from[0] - 1 , piece_from[1] + 1))
-            if board[piece_from[0] + 1][piece_from[1] + 1].color == "Black":
-                self.cset.append((piece_from[0] + 1 , piece_from[1] + 1))
+            if self.piece_at(board[piece[0] - 1][piece[1] + 1], "Black"):
+                self.cset.append((piece[0] - 1 , piece[1] + 1))
+            if self.piece_at(board[piece[0] + 1][piece[1] + 1], "Black"):
+                self.cset.append((piece[0] + 1 , piece[1] + 1))
 
         else:
-            if board[piece_from[0] - 1][piece_from[1] - 1].color == "White":
-                self.cset.append((piece_from[0] - 1 , piece_from[1] - 1))
-            if board[piece_from[0] + 1][piece_from[1] - 1].color == "White":
-                self.cset.append((piece_from[0] + 1 , piece_from[1] - 1))
+            if self.piece_at(board[piece[0] - 1][piece[1] - 1], "White"):
+                self.cset.append((piece[0] - 1 , piece[1] - 1))
+            if self.piece_at(board[piece[0] + 1][piece[1] - 1], "White"):
+                self.cset.append((piece[0] + 1 , piece[1] - 1))
 
         return self.cset
 
-
-    
 class Rook(Piece):
     """Contains attributes of a rook"""
     def __init__(self, empty, color):

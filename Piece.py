@@ -3,8 +3,8 @@ class Piece(object):
     Generalized piece class that contains attributes about whether it is an empty piece or if it is black or white.
     All pieces except empty have their own subclass. Contains a list of locations the piece can move to
     """
-    def __init__(self, empty):
-        self.empty = empty
+    def __init__(self):
+        self.empty = True
         self.color = "NA"
 
     def __repr__(self):
@@ -36,7 +36,7 @@ class Pawn(Piece):
         pass
 
     def generate_moves(self, piece_from, board):
-        """Takes piece_from and calculates all the space the piece can move to"""
+        """Takes piece_from and calculates all the spaces the piece can move to"""
         self.total = []
         if self.color == "White":
             self.total.append((piece_from[0], piece_from[1] + 1))  # One square forward

@@ -67,15 +67,19 @@ class Pawn(Piece):
             return u"\u2659"
 
     def move_set(self, piece, board):
-        """
-        Consolidates all the movement set information and returns final list of valid moves
-        !!!Does NOT include en passant yet!!!
+        """Consolidates all the movement set information and returns final list of valid moves"""
+        total = []
+        total.extend(self.standard_moves(piece, board))
+        total.extend(self.capture_moves(piece, board))
 
-        """
-        pass
+        return total
 
     def standard_moves(self, piece, board):
-        """Takes piece and calculates all the spaces the piece can move to"""
+        """
+        Takes piece and calculates all the legal spaces the piece can move to, not including spaces
+        where a piece can be captured. Has branches depending on whether the moving piece is white or
+        black.
+        """
         self.total = []
         if self.color == "White":
             if not self.piece_at(board[piece[0]][piece[1] + 1]):  # If there is not a piece there
@@ -94,7 +98,7 @@ class Pawn(Piece):
         return self.total
 
     def capture_moves(self, piece, board):
-        """Creates a list of moves where a piece can be captured by the pawn"""
+        """Creates a list of moves where a piece can be captured by the pawn, includes en passant."""
         self.cset = []
         if self.color == "White":
             if self.piece_at(board[piece[0] - 1][piece[1] + 1], "Black"):  # Regular capture

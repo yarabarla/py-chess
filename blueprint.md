@@ -40,4 +40,4 @@
 
 # Goals for Tomorrow
 * Done-- Change get move so user can actually input board coordinates instead of array coordinates --eg. A2 to A4 rather than (0,1) to (0, 3)
-* FIX EN PASSANT
+* Done-- FIX EN PASSANT

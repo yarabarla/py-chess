@@ -69,9 +69,12 @@ class Move(object):
         piece_to = tuple(i for i in raw_input("To?"))
 
         print "Moving from {0} to {1}".format(piece_from, piece_to)
-        coordinates = self.alphanum_to_cartesian(piece_from, piece_to)
+        piece_from, piece_to = self.alphanum_to_cartesian(piece_from, piece_to)
 
-        return coordinates
+        legal = self.main_board[piece_from[0]][piece_from[1]].generate_moves(piece_from,self.main_board)
+        print legal
+
+        return (piece_from, piece_to)
 
     def move(self, piece_from, piece_to):
         """Rudimentary move function for now"""

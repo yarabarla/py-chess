@@ -5,7 +5,7 @@ class Piece(object):
     """
     def __init__(self, empty):
         self.empty = empty
-        self.color = "NA" 
+        self.color = "NA"
 
     def __repr__(self):
         if self.empty:
@@ -37,28 +37,37 @@ class Pawn(Piece):
 
     def generate_moves(self, piece_from, board):
         """Takes piece_from and calculates all the space the piece can move to"""
-        self.legal = []
+        self.total = []
         if self.color == "White":
-            self.legal.append((piece_from[0], piece_from[1] + 1))  # One square forward
+            self.total.append((piece_from[0], piece_from[1] + 1))  # One square forward
 
             if not self.moved:
-                self.legal.append((piece_from[0], piece_from[1] + 2))  # Two squares forward
+                self.total.append((piece_from[0], piece_from[1] + 2))  # Two squares forward
 
         else:   # If piece is black, the math is backwards
-            self.legal.append((piece_from[0], piece_from[1] - 1))
+            self.total.append((piece_from[0], piece_from[1] - 1))
 
             if not self.moved:
-                self.legal.append((piece_from[0], piece_from[1] - 2))
+                self.total.append((piece_from[0], piece_from[1] - 2))
 
-        return self.legal
+        return self.total
 
     def capture_set(self, piece_from, board):
-        """Creates a list of capturable moves"""
-        self.max_possible = []
+        """Creates a list of moves where a piece can be captured by the pawn"""
+        self.cset = []
         if self.color == "White":
-            self.max_possible.append((piece_from[0] - 1 , piece_from[1] + 1))
-            self.max_possible.append((piece_from[0] + 1 , piece_from[1] + 1))
+            if board[piece_from[0] - 1][piece_from[1] + 1].color == "Black":
+                self.cset.append((piece_from[0] - 1 , piece_from[1] + 1))
+            if board[piece_from[0] + 1][piece_from[1] + 1].color == "Black":
+                self.cset.append((piece_from[0] + 1 , piece_from[1] + 1))
 
+        else:
+            if board[piece_from[0] - 1][piece_from[1] - 1].color == "White":
+                self.cset.append((piece_from[0] - 1 , piece_from[1] - 1))
+            if board[piece_from[0] + 1][piece_from[1] - 1].color == "White":
+                self.cset.append((piece_from[0] + 1 , piece_from[1] - 1))
+
+        return self.cset
 class Rook(Piece):
     """Contains attributes of a rook"""
     def __repr__(self):

@@ -138,8 +138,17 @@ class Rook(Piece):
         else:
             return u"\u2656"
 
+    def move_set(self, piece, board):
+        """Consolidates all the movement set information and returns final list of valid moves"""
+        total = self.axial_movement(piece, board)
+        return total
+
     def axial_movement(self, piece, board):
         """Returns moves that are legal and are vertical and horizontal to the piece"""
+        axial = []
+        axial.extend(self.horizontal_set(piece,board)
+        return axial
+
     def horizontal_set(self, piece, board):
         """
         Finds set of moves that are to the horizontal. Note: due to the layout of the board in this
@@ -160,6 +169,23 @@ class Rook(Piece):
                 break
             else:
                 hor_set.append((piece[0], i))
+
+        for i in right:
+            target = board[piece[0]][i]
+            if self.piece_at(target):
+                if target.color != piece_ob.color and not target.empty:
+                    hor_set.append((piece[0], i))
+                break
+            else:
+                hor_set.append((piece[0], i))
+
+        return hor_set
+
+    def vertical_set(self, piece, board):
+        """
+        Finds set of moves that are to the vertical of the piece. Note: due to the layout of the board in
+        this program, vertical means squares in a file, ie. A1,B1,etc.
+        """
 
 class Knight(Piece):
     """Contains attributes of a knight"""

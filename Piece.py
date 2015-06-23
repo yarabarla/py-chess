@@ -159,11 +159,13 @@ class Knight(Piece):
         where a piece can be captured.
         """
         total = []
-        for i in displacement:   # List of tuples that have the displacement values from the knight
+        for i in self.displacement:   # List of tuples that have the displacement values from the knight
             try:
                 target = board[piece[0] + i[0]][piece[1] + i[1]]
-                if not self.piece_at(target) or (target.color != piece.color and not target.empty):
-                    total.append((piece[0] + i[0], piece[1] + i[1]))
+                piece_ob = board[piece[0]][piece[1]]
+                if not self.piece_at(target) or (target.color != piece_ob.color and not target.empty):
+                    if piece[0] + i[0] >= 0 and piece[1] + i[1] >= 0:   # negative numbers cause weirdness
+                        total.append((piece[0] + i[0], piece[1] + i[1]))
 
             except IndexError:
                 pass

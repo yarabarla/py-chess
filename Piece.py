@@ -60,17 +60,19 @@ class Piece(object):
 
         for i in array:
             if direction == 'H':
+                coor = (piece[0], i)
                 target = board[piece[0]][i]
             elif direction == 'V':
+                coor = (i, piece[1])
                 target = board[i][piece[1]]
             if self.piece_at(target):
                 if target.color != piece_ob.color and not target.empty:
-                    lin_set.append((piece[0], i))
+                    lin_set.append(coor)
                 break
             else:
-                lin_set.append((piece[0], i))
+                lin_set.append(coor)
 
-            return lin_set
+        return lin_set
 
 class Pawn(Piece):
     """
@@ -184,16 +186,8 @@ class Rook(Piece):
         left.reverse()              # Reversed so the loop evaluates the square next to the piece first
         right = col[piece[1] + 1:]
 
-        self.linear_set(piece, board, left, [)
-
-        for i in right:
-            target = board[piece[0]][i]
-            if self.piece_at(target):
-                if target.color != piece_ob.color and not target.empty:
-                    hor_set.append((piece[0], i))
-                break
-            else:
-                hor_set.append((piece[0], i))
+        hor_set.extend(self.linear_set(piece, board, left, 'H'))
+        hor_set.extend(self.linear_set(piece, board, right, 'H'))
 
         return hor_set
 
@@ -203,29 +197,13 @@ class Rook(Piece):
         this program, vertical means squares in a file, ie. A1,B1,etc.
         """
         ver_set = []
-        piece_ob = board[piece[0]][piece[1]]
         row = range(8)
         upper = row[:piece[0]]
         upper.reverse()
         lower = row[piece[0] + 1:]
 
-        for i in upper:
-            target = board[i][piece[1]]
-            if self.piece_at(target):
-                if target.color != piece_ob.color and not target.empty:
-                    ver_set.append((i, piece[1]))
-                break
-            else:
-                ver_set.append((i, piece[1]))
-
-        for i in lower:
-            target = board[i][piece[1]]
-            if self.piece_at(target):
-                if target.color != piece_ob.color and not target.empty:
-                    ver_set.append((i, piece[1]))
-                break
-            else:
-                ver_set.append((i, piece[1]))
+        ver_set.extend(self.linear_set(piece, board, upper, 'V'))
+        ver_set.extend(self.linear_set(piece, board, lower, 'V'))
 
         return ver_set
 

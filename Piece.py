@@ -153,7 +153,7 @@ class Knight(Piece):
         else:
             return u"\u2658"
 
-    def standard_moves(self, piece, board):
+    def move_set(self, piece, board):
         """
         Takes a knight and calculates all the legal spaces the piece can move to, including spaces
         where a piece can be captured.

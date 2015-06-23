@@ -1,7 +1,8 @@
 class Piece(object):
     """
-    Generalized piece class that contains attributes about whether it is an empty piece or if it is black or white.
-    All pieces except empty have their own subclass. Contains a list of locations the piece can move to
+    Generalized piece class that contains attributes about whether it is an empty piece or if it is black
+    or white. All pieces except empty have their own subclass. Contains a list of locations the piece can
+    move to.
     """
     def __init__(self):
         self.empty = True
@@ -76,7 +77,7 @@ class Pawn(Piece):
 
     def standard_moves(self, piece, board):
         """
-        Takes piece and calculates all the legal spaces the piece can move to, not including spaces
+        Takes piece and calculates all the legal spaces the piece can move to, NOT including spaces
         where a piece can be captured. Has branches depending on whether the moving piece is white or
         black.
         """
@@ -139,6 +140,8 @@ class Rook(Piece):
 
 class Knight(Piece):
     """Contains attributes of a knight"""
+    displacement = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]
+
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
@@ -149,6 +152,23 @@ class Knight(Piece):
 
         else:
             return u"\u2658"
+
+    def standard_moves(self, piece, board):
+        """
+        Takes a knight and calculates all the legal spaces the piece can move to, including spaces
+        where a piece can be captured.
+        """
+        total = []
+        for i in displacement:   # List of tuples that have the displacement values from the knight
+            try:
+                target = board[piece[0] + i[0]][piece[1] + i[1]]
+                if not self.piece_at(target) or (target.color != piece.color and not target.empty):
+                    total.append((piece[0] + i[0], piece[1] + i[1]))
+
+            except IndexError:
+                pass
+
+        return total
 
 class Bishop(Piece):
     """Contains attributes of a bishop"""

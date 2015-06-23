@@ -49,6 +49,29 @@ class Piece(object):
             else:
                 return False
 
+    def linear_set(self, piece, board, array, direction = None):
+        """
+        Checks pieces in array until it hits an ally piece or the end of the board.
+        Returns the set of valid moves. Direction determines the value of the axis that is to remain
+        constant, eg. to check horizontal moves of a rook, the rank remains constant.
+        """
+        lin_set = []
+        piece_ob = board[piece[0]][piece[1]]
+
+        for i in array:
+            if direction == 'H':
+                target = board[piece[0]][i]
+            elif direction == 'V':
+                target = board[i][piece[1]]
+            if self.piece_at(target):
+                if target.color != piece_ob.color and not target.empty:
+                    lin_set.append((piece[0], i))
+                break
+            else:
+                lin_set.append((piece[0], i))
+
+            return lin_set
+
 class Pawn(Piece):
     """
     Contains attributes of a pawn. Unicode for all black and white pieces switched around since they
@@ -156,20 +179,12 @@ class Rook(Piece):
         program, horizontal means squares in a rank, ie. A1,A2,etc.
         """
         hor_set = []
-        piece_ob = board[piece[0]][piece[1]]
         col = range(8)
         left = col[:piece[1]]
         left.reverse()              # Reversed so the loop evaluates the square next to the piece first
         right = col[piece[1] + 1:]
 
-        for i in left:  # Checks pieces to left until it hits an ally piece or the end of the board
-            target = board[piece[0]][i]
-            if self.piece_at(target):
-                if target.color != piece_ob.color and not target.empty:
-                    hor_set.append((piece[0], i))
-                break
-            else:
-                hor_set.append((piece[0], i))
+        self.linear_set(piece, board, left, [)
 
         for i in right:
             target = board[piece[0]][i]

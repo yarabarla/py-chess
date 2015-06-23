@@ -138,6 +138,29 @@ class Rook(Piece):
         else:
             return u"\u2656"
 
+    def axial_movement(self, piece, board):
+        """Returns moves that are legal and are vertical and horizontal to the piece"""
+    def horizontal_set(self, piece, board):
+        """
+        Finds set of moves that are to the horizontal. Note: due to the layout of the board in this
+        program, horizontal means squares in a rank, ie. A1,A2,etc.
+        """
+        hor_set = []
+        piece_ob = board[piece[0]][piece[1]]
+        col = range(8)
+        left = col[:piece[1]]
+        left.reverse()              # Reversed so the loop evaluates the square next to the piece first
+        right = col[piece[1] + 1:]
+
+        for i in left:  # Checks pieces to left until it hits an ally piece or the end of the board
+            target = board[piece[0]][i]
+            if self.piece_at(target):
+                if target.color != piece_ob.color and not target.empty:
+                    hor_set.append((piece[0], i))
+                break
+            else:
+                hor_set.append((piece[0], i))
+
 class Knight(Piece):
     """Contains attributes of a knight"""
     displacement = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]

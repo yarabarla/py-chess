@@ -168,10 +168,10 @@ class Rook(Piece):
 
     def move_set(self, piece, board):
         """Consolidates all the movement set information and returns final list of valid moves"""
-        total = self.axial_movement(piece, board)
+        total = self.axial_set(piece, board)
         return total
 
-    def axial_movement(self, piece, board):
+    def axial_set(self, piece, board):
         """Returns moves that are legal and are vertical and horizontal to the piece"""
         axial = []
         axial.extend(self.horizontal_set(piece, board))
@@ -278,8 +278,11 @@ class Bishop(Piece):
 
         return diag_set
 
-class Queen(Piece):
-    """Contains attributes of a queen"""
+class Queen(Rook, Bishop):
+    """
+    Contains attributes of a queen. Queen inherits from Rook and Bishop because effectively, a queen is
+    a combination of the movement of rooks and bishops.
+    """
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
@@ -290,6 +293,13 @@ class Queen(Piece):
 
         else:
             return u"\u2655"
+
+    def move_set(self, piece, board):
+        """Combines axial_set() from rook and diagonal_set() from bishop."""
+        total = []
+        total.extend(self.axial_set(piece, board))
+        total.extend(self.diagonal_set(piece, board))
+        return total
 
 class King(Piece):
     """Contains attributes of a king"""

@@ -264,7 +264,10 @@ class Bishop(Piece):
 
     def diagonal_set(self, piece, board):
         """Calculates moves from the piece in each diagonal direction until they encounter a piece"""
-        
+        upper_left = [(piece[0] - x - 1, piece[1] - x - 1) for x in range(min(piece[0], piece[1]))]
+        upper_right = [(piece[0] - x - 1, piece[1] + x + 1) for x in range(min(piece[0], 7 - piece[1]))]
+        lower_left = [(piece[0] + x + 1, piece[1] - x - 1) for x in range(min(7 - piece[0], piece[1]))]
+        lower_right = [(piece[0] + x + 1, piece[1] + x + 1) for x in range(min(7-piece[0], 7-piece[1]))]
 
 class Queen(Piece):
     """Contains attributes of a queen"""

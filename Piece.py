@@ -65,6 +65,9 @@ class Piece(object):
             elif direction == 'V':
                 coor = (i, piece[1])
                 target = board[i][piece[1]]
+            elif direction == 'D':
+                coor = (i[0], i[1])
+                target = board[i[0]][i[1]]
             if self.piece_at(target):
                 if target.color != piece_ob.color and not target.empty:
                     lin_set.append(coor)
@@ -253,6 +256,15 @@ class Bishop(Piece):
 
         else:
             return u"\u2657"
+
+    def move_set(self, piece, board):
+        """Consolidates all the movement set information and returns final list of valid moves"""
+        final = self.diagonal_set(piece, board)
+        return final
+
+    def diagonal_set(self, piece, board):
+        """Calculates moves from the piece in each diagonal direction until they encounter a piece"""
+        
 
 class Queen(Piece):
     """Contains attributes of a queen"""

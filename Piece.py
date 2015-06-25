@@ -226,6 +226,11 @@ class Knight(Piece):
             return u"\u2658"
 
     def move_set(self, piece, board):
+        """Returns complete set of legal moves"""
+        total = self.standard_set(piece, board)
+        return total
+
+    def standard_set(self, piece, board):
         """
         Takes a knight and calculates all the legal spaces the piece can move to, including spaces
         where a piece can be captured.

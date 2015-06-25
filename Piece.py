@@ -331,15 +331,16 @@ class King(Piece):
         """Calculates the valid moves for a king"""
         std_set = []
 
-        piece_ob = board[piece[0]][piece[1]]
-        for i in self.displacement:
-           coor = (piece[0] + i[0], piece[1] + i[1])
-           target = board[piece[0] + i[0]][piece[1] + i[1]]
-           if self.piece_at(target):
-               if target.color != piece_ob.color and not target.empty:
-                   std_set.append(coor)
-               break
-           else:
-               std_set.append(coor)
+        for i in self.displacement:   # List of tuples that have the displacement values from the knight
+            try:
+                coor = (piece[0] + i[0], piece[1] + i[1])
+                target = board[coor[0]][coor[1]]
+                piece_ob = board[piece[0]][piece[1]]
+                if not self.piece_at(target) or (target.color != piece_ob.color and not target.empty):
+                    if coor[0] >= 0 and coor[1] >= 0:   # negative numbers cause weirdness
+                        std_set.append(coor)
+
+            except IndexError:
+                pass
 
         return std_set

@@ -314,4 +314,24 @@ class King(Piece):
         else:
             return u"\u2654"
 
+    def move_set(self, piece, board):
+        """Creates the moveset for the king"""
+        total = self.standard_set(piece, board)
+        return total
 
+    def standard_set(self, piece, board):
+        """Calculates the valid moves for a king"""
+        std_set = []
+        displacement = [(0,1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+        piece_ob = board[piece[0]][piece[1]]
+        for i in displacement:
+           coor = (piece[0] + i[0], piece[1] + i[1])
+           target = board[piece[0] + i[0]][piece[1] + i[1]]
+           if self.piece_at(target):
+               if target.color != piece_ob.color and not target.empty:
+                   std_set.append(coor)
+               break
+           else:
+               std_set.append(coor)
+
+        return std_set

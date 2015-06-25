@@ -66,26 +66,33 @@ class Move(object):
 
     def get_move(self):
         """
-        Prompts user for desired move. Only using numerical coordinates for now.
+        Prompts user for desired move. Only using board coordinates for now.
         Stores from and to coordinates in tuples. Returns a tuple of these tuples."
         Input is basic now, eg. 12 is parsed as (1, 2)
         """
         piece_from = tuple(i for i in raw_input("From?"))
         piece_to = tuple(i for i in raw_input("To?"))
 
+        piece_from, piece_to = self.anum_to_cart(piece_from, piece_to)   # Converts user input into numbers
+        legal_moves = self.get_legal(piece_from)
+
+        if piece_to not in legal_moves:
+            print "Move is not legal. Try again."
+            get_move()
+
+
         print "Moving from {0} to {1}".format(piece_from, piece_to)
-        piece_from, piece_to = self.anum_to_cart(piece_from, piece_to)
-
-        legal = self.main_board[piece_from[0]][piece_from[1]].move_set(piece_from,self.main_board)
-        for i in legal:   # List of legal moves for testing
-            print self.cart_to_anum(i),
-
         return (piece_from, piece_to)
 
     def apply_move(self, piece_from, piece_to):
         """Rudimentary move function for now"""
         self.main_board[piece_to[0]][piece_to[1]] = self.main_board[piece_from[0]][piece_from[1]]  # Moves piece
         self.main_board[piece_from[0]][piece_from[1]] = Piece()  # Makes old location empty
+
+    def get_legal(self, piece):
+        """Gets list of legal moves"""
+        legal = self.main_board[piece_from[0]][piece_from[1]].move_set(piece_from,self.main_board)
+        return legal
 
     def anum_to_cart(self, piece_from, piece_to):
         """

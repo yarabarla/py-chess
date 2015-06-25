@@ -59,6 +59,11 @@ class Move(object):
 
         return board
 
+    def move(self):
+        """Consolidates move methods"""
+        wanted = self.get_move()
+        self.apply_move(wanted[0], wanted[1])
+
     def get_move(self):
         """
         Prompts user for desired move. Only using numerical coordinates for now.
@@ -73,7 +78,7 @@ class Move(object):
 
         legal = self.main_board[piece_from[0]][piece_from[1]].move_set(piece_from,self.main_board)
         for i in legal:   # List of legal moves for testing
-            print self.cart_to_anum(i)
+            print self.cart_to_anum(i),
 
         return (piece_from, piece_to)
 

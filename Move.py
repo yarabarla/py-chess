@@ -70,7 +70,7 @@ class Move(object):
         """
         Prompts user for desired move. Only using board coordinates for now.
         Stores from and to coordinates in tuples. Returns a tuple of these tuples."
-        Input is basic now, eg. 12 is parsed as (1, 2)
+        Eg. A1 is parsed as (0, 0)
         """
         piece_from = tuple(i for i in raw_input("From?"))
         piece_to = tuple(i for i in raw_input("To?"))

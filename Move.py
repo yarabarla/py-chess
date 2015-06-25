@@ -78,20 +78,22 @@ class Move(object):
 
         if piece_to not in legal_moves:
             print "Move is not legal. Try again."
-            get_move()
+            self.get_move()
 
+        else:
+            location = self.cart_to_anum(piece_from)
+            destination = self.cart_to_anum(piece_to)
+            print "Moving from {0} to {1}".format(location, destination)
+            return (piece_from, piece_to)
 
-        print "Moving from {0} to {1}".format(piece_from, piece_to)
-        return (piece_from, piece_to)
-
-    def apply_move(self, piece_from, piece_to):
+    def apply_move(self, location, destination):
         """Rudimentary move function for now"""
-        self.main_board[piece_to[0]][piece_to[1]] = self.main_board[piece_from[0]][piece_from[1]]  # Moves piece
-        self.main_board[piece_from[0]][piece_from[1]] = Piece()  # Makes old location empty
+        self.main_board[destination[0]][destination[1]] = self.main_board[location[0]][location[1]]
+        self.main_board[location[0]][location[1]] = Piece()  # Makes old location empty
 
     def get_legal(self, piece):
         """Gets list of legal moves"""
-        legal = self.main_board[piece_from[0]][piece_from[1]].move_set(piece_from,self.main_board)
+        legal = self.main_board[piece[0]][piece[1]].move_set(piece, self.main_board)
         return legal
 
     def anum_to_cart(self, piece_from, piece_to):
@@ -118,5 +120,5 @@ class Move(object):
     def cart_to_anum(self, piece):
         """Converts from array coordinates to board coordinates for testing purposes"""
         itoa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-        piece = (itoa[piece[0]], piece[1] + 1)
+        piece = "".join((itoa[piece[0]], str(piece[1] + 1)))
         return piece

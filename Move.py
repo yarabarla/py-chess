@@ -61,7 +61,9 @@ class Move(object):
 
     def move(self):
         """Consolidates move methods"""
-        wanted = self.get_move()
+        wanted = None
+        while wanted is None:
+            wanted = self.get_move()
         self.apply_move(wanted[0], wanted[1])
 
     def get_move(self):
@@ -78,7 +80,7 @@ class Move(object):
 
         if piece_to not in legal_moves:
             print "Move is not legal. Try again."
-            self.get_move()
+            return None
 
         else:
             location = self.cart_to_anum(piece_from)

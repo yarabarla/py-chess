@@ -77,6 +77,24 @@ class Piece(object):
 
         return lin_set
 
+    def standard_set(self, piece, board, displacement):
+        """Calculates valid moves given a list of displacement tuples"""
+        std_set = []
+        piece_ob = board[piece[0]][piece[1]]
+
+        for i in displacement:
+            try:
+                coor = (piece[0] + i[0], piece[1] + i[1])
+                target = board[coor[0]][coor[1]]
+                if not self.piece_at(target) or (target.color != piece_ob.color and not target.empty):
+                    if coor[0] >= 0 and coor[1] >= 0:   # negative numbers cause weirdness
+                        std_set.append(coor)
+
+            except IndexError:
+                pass
+
+        return std_set
+
 class Pawn(Piece):
     """
     Contains attributes of a pawn. Unicode for all black and white pieces switched around since they
@@ -227,28 +245,8 @@ class Knight(Piece):
 
     def move_set(self, piece, board):
         """Returns complete set of legal moves"""
-        total = self.standard_set(piece, board)
+        total = self.standard_set(piece, board, self.displacement)
         return total
-
-    def standard_set(self, piece, board):
-        """
-        Takes a knight and calculates all the legal spaces the piece can move to, including spaces
-        where a piece can be captured.
-        """
-        std_set = []
-        for i in self.displacement:   # List of tuples that have the displacement values from the knight
-            try:
-                coor = (piece[0] + i[0], piece[1] + i[1])
-                target = board[coor[0]][coor[1]]
-                piece_ob = board[piece[0]][piece[1]]
-                if not self.piece_at(target) or (target.color != piece_ob.color and not target.empty):
-                    if coor[0] >= 0 and coor[1] >= 0:   # negative numbers cause weirdness
-                        std_set.append(coor)
-
-            except IndexError:
-                pass
-
-        return std_set
 
 class Bishop(Piece):
     """Contains attributes of a bishop"""
@@ -324,23 +322,7 @@ class King(Piece):
 
     def move_set(self, piece, board):
         """Creates the moveset for the king"""
-        total = self.standard_set(piece, board)
+        total = self.standard_set(piece, board, self.displacement)
         return total
 
-    def standard_set(self, piece, board):
-        """Calculates the valid moves for a king"""
-        std_set = []
 
-        for i in self.displacement:   # List of tuples that have the displacement values from the knight
-            try:
-                coor = (piece[0] + i[0], piece[1] + i[1])
-                target = board[coor[0]][coor[1]]
-                piece_ob = board[piece[0]][piece[1]]
-                if not self.piece_at(target) or (target.color != piece_ob.color and not target.empty):
-                    if coor[0] >= 0 and coor[1] >= 0:   # negative numbers cause weirdness
-                        std_set.append(coor)
-
-            except IndexError:
-                pass
-
-        return std_set

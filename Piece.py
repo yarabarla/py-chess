@@ -235,19 +235,20 @@ class Knight(Piece):
         Takes a knight and calculates all the legal spaces the piece can move to, including spaces
         where a piece can be captured.
         """
-        total = []
+        std_set = []
         for i in self.displacement:   # List of tuples that have the displacement values from the knight
             try:
-                target = board[piece[0] + i[0]][piece[1] + i[1]]
+                coor = (piece[0] + i[0], piece[1] + i[1])
+                target = board[coor[0]][coor[1]]
                 piece_ob = board[piece[0]][piece[1]]
                 if not self.piece_at(target) or (target.color != piece_ob.color and not target.empty):
-                    if piece[0] + i[0] >= 0 and piece[1] + i[1] >= 0:   # negative numbers cause weirdness
-                        total.append((piece[0] + i[0], piece[1] + i[1]))
+                    if coor[0] >= 0 and coor[1] >= 0:   # negative numbers cause weirdness
+                        std_set.append(coor)
 
             except IndexError:
                 pass
 
-        return total
+        return std_set
 
 class Bishop(Piece):
     """Contains attributes of a bishop"""
@@ -308,6 +309,8 @@ class Queen(Rook, Bishop):
 
 class King(Piece):
     """Contains attributes of a king"""
+    displacement = [(0,1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
@@ -327,9 +330,9 @@ class King(Piece):
     def standard_set(self, piece, board):
         """Calculates the valid moves for a king"""
         std_set = []
-        displacement = [(0,1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+
         piece_ob = board[piece[0]][piece[1]]
-        for i in displacement:
+        for i in self.displacement:
            coor = (piece[0] + i[0], piece[1] + i[1])
            target = board[piece[0] + i[0]][piece[1] + i[1]]
            if self.piece_at(target):

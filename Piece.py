@@ -176,6 +176,7 @@ class Rook(Piece):
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
+        self.moved = False   # For castling
 
     def __repr__(self):
         if self.color == "White":
@@ -312,6 +313,7 @@ class King(Piece):
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
+        self.moved = False   # For castling
 
     def __repr__(self):
         if self.color == "White":

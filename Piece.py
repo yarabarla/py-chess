@@ -154,9 +154,9 @@ class Pawn(Piece):
                 self.cset.append((piece[0] + 1 , piece[1] + 1))
 
             if self.piece_at(board[piece[0] - 1][piece[1]], "Black", piece[1]):  # En passant
-                self.cset.append((piece[0] - 1, piece[1]))
+                self.cset.append((piece[0] - 1, piece[1] + 1))
             if self.piece_at(board[piece[0] + 1][piece[1]], "Black", piece[1]):
-                self.cset.append((piece[0] + 1, piece[1]))
+                self.cset.append((piece[0] + 1, piece[1] + 1))
 
         else:
             if self.piece_at(board[piece[0] - 1][piece[1] - 1], "White"):  # Regular capture
@@ -165,9 +165,9 @@ class Pawn(Piece):
                 self.cset.append((piece[0] + 1 , piece[1] - 1))
 
             if self.piece_at(board[piece[0] - 1][piece[1]], "White", piece[1]):  # En passant
-                self.cset.append((piece[0] - 1, piece[1]))
+                self.cset.append((piece[0] - 1, piece[1] - 1))
             if self.piece_at(board[piece[0] + 1][piece[1]], "White", piece[1]):
-                self.cset.append((piece[0] + 1, piece[1]))
+                self.cset.append((piece[0] + 1, piece[1] - 1))
 
         return self.cset
 

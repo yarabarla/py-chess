@@ -73,7 +73,7 @@ class Piece(object):
                     if target.color != piece_ob.color and not target.empty:
                         lin_set.append(coor)
                 else:
-                    if isinstance(target, Rook):
+                    if isinstance(target, Rook) and target.color == self.color:   # If rook on same team
                         lin_set.append(coor)
                 break
             else:
@@ -313,8 +313,8 @@ class Queen(Rook, Bishop):
 class King(Piece):
     """Contains attributes of a king"""
     displacement = [(0,1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
-    q_disp = [(-1,0), (-2,0), (-3,0)]
-    k_disp = [(1,0), (2,0)]
+    q_disp = [(-1, 0), (-2, 0), (-3, 0), (-4, 0)]
+    k_disp = [(1, 0), (2, 0), (3, 0)]
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
@@ -329,11 +329,26 @@ class King(Piece):
 
     def move_set(self, piece, board):
         """Creates the moveset for the king"""
-        total = self.standard_set(piece, board, self.displacement)
+        total = []
+        total.extend(self.standard_set(piece, board, self.displacement))
+        total.extend(self.castle_set(piece, board, 'K'))
+        total.extend(self.castle_set(piece, board, 'Q'))
         return total
 
-    def queen_side_castling(self, piece, board):
+    def castle_set(self, piece, board):
         """Checks castling on queen's side"""
-        check = self.linear_set(piece, board, q_disp, 'C')
+        castle = []
+        for i in xrange(2):
+            if i = 1:
+                c_side = self.q_disp
+                coor = (piece[0], piece[1] - 4)   # Checks until queen's side rook
+            else:
+                c_side = self.k_disp
+                coor = (piece[0], piece[1] + 3)   # Checks until king's side rook
 
+            test = self.linear_set(piece, board, c_side, 'C')
 
+            if coor in test and not board[coor[0]][coor[1]].moved:
+                castle.extend(test)   # Extend not append since linear_set returns an array
+
+       return castle

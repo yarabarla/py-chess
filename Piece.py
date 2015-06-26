@@ -331,8 +331,8 @@ class King(Piece):
         """Creates the moveset for the king"""
         total = []
         total.extend(self.standard_set(piece, board, self.displacement))
-        total.extend(self.castle_set(piece, board, 'K'))
-        total.extend(self.castle_set(piece, board, 'Q'))
+        if not self.moved:
+            total.extend(self.castle_set(piece, board))
         return total
 
     def castle_set(self, piece, board):

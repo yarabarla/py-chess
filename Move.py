@@ -64,6 +64,16 @@ class Move(object):
         wanted = None
         while wanted is None:
             wanted = self.get_move()
+
+        piece = self.main_board[wanted[0][0]][wanted[0][1]]
+        if isinstance(piece, Pawn):   # If the piece to be moved is a pawn
+            piece.moved = True
+            if abs(wanted[0][1] - wanted[1][1]) == 2:   # If the pawn moved two spaces on its first move
+                piece.double_step = True
+
+        if isinstance(piece, Rook) or isinstance(piece, King):   # Need to track for castling
+            piece.moved = True
+
         self.apply_move(wanted[0], wanted[1])
 
     def get_move(self):

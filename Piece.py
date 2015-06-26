@@ -69,8 +69,12 @@ class Piece(object):
                 coor = (i[0], i[1])
                 target = board[i[0]][i[1]]
             if self.piece_at(target):
-                if target.color != piece_ob.color and not target.empty:
-                    lin_set.append(coor)
+                if direction != 'C':   # C is for castling purposes
+                    if target.color != piece_ob.color and not target.empty:
+                        lin_set.append(coor)
+                else:
+                    if isinstance(target, Rook):
+                        lin_set.append(coor)
                 break
             else:
                 lin_set.append(coor)
@@ -309,7 +313,8 @@ class Queen(Rook, Bishop):
 class King(Piece):
     """Contains attributes of a king"""
     displacement = [(0,1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
-
+    q_disp = [(-1,0), (-2,0), (-3,0)]
+    k_disp = [(1,0), (2,0)]
     def __init__(self, empty, color):
         self.empty = empty
         self.color = color
@@ -326,5 +331,9 @@ class King(Piece):
         """Creates the moveset for the king"""
         total = self.standard_set(piece, board, self.displacement)
         return total
+
+    def queen_side_castling(self, piece, board):
+        """Checks castling on queen's side"""
+        check = self.linear_set(piece, board, q_disp, 'C')
 
 

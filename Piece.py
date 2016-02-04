@@ -339,7 +339,7 @@ class King(Piece):
         """Checks castling on queen's side"""
         castle = []
         for i in xrange(2):
-            if (i == 1):
+            if i == 1:
                 c_side = self.q_disp
                 coor = (piece[0], piece[1] - 4)   # Checks until queen's side rook
             else:
